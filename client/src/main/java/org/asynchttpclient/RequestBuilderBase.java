@@ -422,7 +422,7 @@ public abstract class RequestBuilderBase<T extends RequestBuilderBase<T>> {
 
   public T addQueryParams(List<Param> params) {
     if (queryParams == null)
-      queryParams = params;
+      queryParams = new ArrayList<>(params);
     else
       queryParams.addAll(params);
     return asDerivedType();
@@ -436,7 +436,7 @@ public abstract class RequestBuilderBase<T extends RequestBuilderBase<T>> {
     // reset existing query
     if (this.uri != null && isNonEmpty(this.uri.getQuery()))
       this.uri = this.uri.withNewQuery(null);
-    queryParams = params;
+    queryParams = new ArrayList<>(params);
     return asDerivedType();
   }
 
@@ -456,7 +456,7 @@ public abstract class RequestBuilderBase<T extends RequestBuilderBase<T>> {
   public T setFormParams(List<Param> params) {
     resetNonMultipartData();
     resetMultipartData();
-    this.formParams = params;
+    this.formParams = new ArrayList<>(params);
     return asDerivedType();
   }
 
